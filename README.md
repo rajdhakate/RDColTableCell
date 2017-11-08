@@ -1,7 +1,7 @@
 # RDColTableCell
 Tableview cell contains Collection view. Easy delegate to get back the selected collection view item of selected tableview cell.
 
-![Demo](https://github.com/rajdhakate/RDColTeableCell/blob/master/RDColTableView.gif)
+![Demo](https://github.com/rajdhakate/RDColTableCell/blob/master/demo.gif)
 
 ## REQUISITE : Xcode 9 or Later, iOS 9+.**
 
