@@ -10,6 +10,7 @@
 #import "RDColTableCell.h"
 
 static NSString *cellID = @"tableCell";
+static NSString *normalCellID = @"normalCell";
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate, RDColTableViewDelegate, RDColTableViewDatasource>
 
@@ -26,6 +27,7 @@ static NSString *cellID = @"tableCell";
     _tableview.delegate = self;
     _tableview.dataSource = self;
     [_tableview registerNib:[UINib nibWithNibName:@"RDColTableCell" bundle:nil] forCellReuseIdentifier:cellID];
+    [_tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:normalCellID];
 }
 
 #pragma mark : RDColTableViewDatasource
@@ -53,11 +55,17 @@ static NSString *cellID = @"tableCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    RDColTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
-    cell.datasource = self;
-    cell.delegate = self;
-    [cell.collectionview registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
-    return cell;
+    if (indexPath.row%2) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:normalCellID];
+        cell.textLabel.text = [NSString stringWithFormat:@"Normal Cell %d", indexPath.row];
+        return cell;
+    } else {
+        RDColTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+        cell.datasource = self;
+        cell.delegate = self;
+        [cell.collectionview registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+        return cell;
+    }
 }
 
 
